@@ -1,6 +1,6 @@
 # Data provenance
 
-The modelling pipeline downloads **South German Credit** directly from the UCI Machine Learning Repository using `ucimlrepo` dataset id **522**.
+The modelling pipeline downloads **South German Credit** directly from the official UCI Machine Learning Repository archive for dataset id **522** and reads `SouthGermanCredit.asc` from the published ZIP.
 
 Official UCI DOI: `10.24432/C5X89F`.
 
