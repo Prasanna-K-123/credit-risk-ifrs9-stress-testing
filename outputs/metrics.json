@@ -1,7 +1,7 @@
 {
   "challenger_test": {
     "auc": 0.752857142857143,
-    "brier": 0.19579481800630075,
+    "brier": 0.19579481800630077,
     "calibration_intercept": -0.6569308064751237,
     "calibration_slope": 1.4286587825303707,
     "gini": 0.505714285714286,
@@ -39,25 +39,25 @@
     "ifrs9_scenario_parameters": "illustrative"
   },
   "portfolio_ead_holdout": 674042.0,
-  "scenario_weighted_ecl": 210022.47276932036,
-  "scenario_weighted_ecl_rate": 0.3115866263071446,
+  "scenario_weighted_ecl": 210022.47276932033,
+  "scenario_weighted_ecl_rate": 0.31158662630714457,
   "scorecard_test": {
     "auc": 0.7295238095238095,
     "auc_ci_95": [
       0.6514866944792101,
       0.806362852724793
     ],
-    "brier": 0.18375347345221965,
-    "calibration_intercept": -0.31215653135166466,
-    "calibration_slope": 0.6411495519292166,
+    "brier": 0.18375347345221954,
+    "calibration_intercept": -0.31215653135166227,
+    "calibration_slope": 0.6411495519292194,
     "gini": 0.4590476190476189,
     "ks": 0.37380952380952376
   },
   "scorecard_validation": {
     "auc": 0.8188095238095239,
-    "brier": 0.15504048972354312,
-    "calibration_intercept": -0.22284220439892477,
-    "calibration_slope": 0.9706129110551892,
+    "brier": 0.1550404897235427,
+    "calibration_intercept": -0.2228422043989237,
+    "calibration_slope": 0.9706129110551955,
     "gini": 0.6376190476190478,
     "ks": 0.5404761904761906
   }
