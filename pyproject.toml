@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "credit-risk-ifrs9-stress-testing"
+version = "0.1.0"
+description = "Credit risk modelling, IFRS 9 ECL, stress testing, validation and monitoring."
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
