@@ -1,8 +1,8 @@
 # Data provenance
 
-The modelling pipeline downloads **South German Credit** directly from the UCI Machine Learning Repository using `ucimlrepo` dataset id **573**.
+The modelling pipeline downloads **South German Credit** directly from the UCI Machine Learning Repository using `ucimlrepo` dataset id **522**.
 
-Official UCI DOI: `10.24432/C5QG88`.
+Official UCI DOI: `10.24432/C5X89F`.
 
 The dataset contains 1,000 historical credit observations, 20 predictors and a binary credit-risk outcome. UCI documents 700 good and 300 bad credits, no missing values, and notes that bad credits were deliberately oversampled.
 
