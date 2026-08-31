@@ -59,11 +59,11 @@ def _to_default_target(raw_y: pd.Series) -> pd.Series:
 def load_south_german_credit() -> tuple[pd.DataFrame, pd.Series]:
     """Fetch the corrected South German Credit dataset from UCI.
 
-    UCI dataset id 573 has 1,000 observations, 20 predictors and no missing
+    UCI dataset id 522 has 1,000 observations, 20 predictors and no missing
     values. The corrected source coding is 0=bad and 1=good; this function
     standardizes the modelling target to ``default=1`` for bad/default.
     """
-    dataset = fetch_ucirepo(id=573)
+    dataset = fetch_ucirepo(id=522)
     X = _standardize_columns(dataset.data.features.copy())
     raw_y = dataset.data.targets.copy()
 
