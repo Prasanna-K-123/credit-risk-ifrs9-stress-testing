@@ -22,7 +22,7 @@ The project is designed to demonstrate the workflow behind **PD modelling, score
 
 ## Data
 
-The empirical PD model uses the **UCI South German Credit** dataset (dataset id 573, DOI `10.24432/C5QG88`): 1,000 observations, 20 predictors, 700 good and 300 bad credits.
+The empirical PD model uses the **UCI South German Credit** dataset (dataset id 522, DOI `10.24432/C5X89F`): 1,000 observations, 20 predictors, 700 good and 300 bad credits.
 
 UCI notes that the bad-credit class was oversampled. The data also contain no dates, recovery cash flows, undrawn commitments or macro histories. Those facts drive several deliberate limitations:
 
