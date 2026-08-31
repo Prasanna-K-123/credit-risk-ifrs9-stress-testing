@@ -1,11 +1,17 @@
 from __future__ import annotations
 
+from io import BytesIO
+from urllib.request import Request, urlopen
+from zipfile import ZipFile
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from ucimlrepo import fetch_ucirepo
 
 from src.config import RANDOM_STATE
 
+
+UCI_ZIP_URL = "https://archive.ics.uci.edu/static/public/522/south+german+credit.zip"
+UCI_DATA_FILE = "SouthGermanCredit.asc"
 
 GERMAN_TO_ENGLISH = {
     "laufkont": "status",
@@ -41,8 +47,6 @@ def _standardize_columns(df: pd.DataFrame) -> pd.DataFrame:
 def _to_default_target(raw_y: pd.Series) -> pd.Series:
     """Return target as 1=bad/default and 0=good/non-default."""
     s = pd.Series(raw_y).copy()
-
-    # String/factor labels if a client version exposes semantic levels.
     lowered = s.astype(str).str.strip().str.lower()
     if set(lowered.unique()).issubset({"good", "bad"}):
         return lowered.map({"good": 0, "bad": 1}).astype(int).rename("default")
@@ -52,29 +56,31 @@ def _to_default_target(raw_y: pd.Series) -> pd.Series:
     if unique != {0, 1}:
         raise ValueError(f"Unexpected target encoding: {sorted(unique)}")
 
-    # Grömping's corrected South German Credit coding: 0=bad, 1=good.
+    # Corrected South German Credit coding: 0=bad, 1=good.
     return (1 - numeric).astype(int).rename("default")
 
 
 def load_south_german_credit() -> tuple[pd.DataFrame, pd.Series]:
-    """Fetch the corrected South German Credit dataset from UCI.
+    """Download the corrected South German Credit source from UCI.
 
-    UCI dataset id 522 has 1,000 observations, 20 predictors and no missing
-    values. The corrected source coding is 0=bad and 1=good; this function
-    standardizes the modelling target to ``default=1`` for bad/default.
+    The official archive contains 1,000 observations and 20 predictors. Raw
+    target coding is 0=bad and 1=good; the modelling convention used here is
+    ``default=1`` for a bad/default outcome.
     """
-    dataset = fetch_ucirepo(id=522)
-    X = _standardize_columns(dataset.data.features.copy())
-    raw_y = dataset.data.targets.copy()
+    request = Request(UCI_ZIP_URL, headers={"User-Agent": "credit-risk-research/1.0"})
+    with urlopen(request, timeout=30) as response:  # nosec B310 - fixed HTTPS UCI URL
+        archive_bytes = response.read()
 
-    if isinstance(raw_y, pd.DataFrame):
-        raw_y = _standardize_columns(raw_y)
-        if "credit_risk" in raw_y.columns:
-            raw_y = raw_y["credit_risk"]
-        else:
-            raw_y = raw_y.iloc[:, 0]
+    with ZipFile(BytesIO(archive_bytes)) as archive:
+        with archive.open(UCI_DATA_FILE) as handle:
+            raw = pd.read_csv(handle, sep=r"\s+")
 
-    y = _to_default_target(raw_y)
+    raw = _standardize_columns(raw)
+    if "credit_risk" not in raw.columns:
+        raise RuntimeError("UCI source schema changed: credit_risk target not found.")
+
+    y = _to_default_target(raw.pop("credit_risk"))
+    X = raw
     return X, y
 
 
