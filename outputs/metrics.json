@@ -1,7 +1,7 @@
 {
   "challenger_test": {
     "auc": 0.752857142857143,
-    "brier": 0.19579481800630077,
+    "brier": 0.19579481800630075,
     "calibration_intercept": -0.6569308064751237,
     "calibration_slope": 1.4286587825303707,
     "gini": 0.505714285714286,
