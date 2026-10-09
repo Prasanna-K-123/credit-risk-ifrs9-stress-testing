@@ -1,0 +1,25 @@
+{
+  "holdout_sha256": "c41e3d9ef708852e7b69cc054b6bd745e8a829900a2fa88fed1e00d56ca95b1c",
+  "rows": 200,
+  "auc_challenger_minus_scorecard": 0.02333333333333354,
+  "paired_auc_difference_ci95": [
+    -0.013868489877198725,
+    0.061263020833333376
+  ],
+  "brier_challenger_minus_scorecard": 0.012041344554081207,
+  "paired_brier_difference_ci95": [
+    -0.009032120421283821,
+    0.032945050814605
+  ],
+  "frozen_validation_threshold": 0.17,
+  "holdout_false_negatives": 11,
+  "holdout_false_positives": 78,
+  "holdout_weighted_cost_5_to_1": 133,
+  "approve_all_weighted_cost": 300,
+  "reject_all_weighted_cost": 140,
+  "warnings": [
+    "Holdout already published; this is a retrospective audit.",
+    "Challenger trained on 800 rows versus 600 for the scorecard.",
+    "No observation dates, representative deployment prior, empirical LGD or EAD."
+  ]
+}

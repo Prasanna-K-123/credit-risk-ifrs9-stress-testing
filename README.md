@@ -1,5 +1,15 @@
 # Credit Risk, IFRS 9 & Stress Testing
 
+## Evidence release — 2026-10-09
+
+[Paired uncertainty and decision audit](outputs/decision_audit/summary.json) · [Prior-shift scenarios](outputs/decision_audit/prior_shift_scenarios.csv) · `python audit_reference.py`
+
+The challenger AUC difference is 0.0233 with paired 95% CI [-0.0139, 0.0613]. Its apparent advantage is uncertain, and it used more training data. The frozen validation-selected 0.17 threshold has holdout illustrative cost 133 versus reject-all 140 under 5:1 costs; this is not a demonstrated deployment improvement.
+
+[Research scope and next extension](docs/EVIDENCE_REVIEW.md)
+
+---
+
 A reproducible **credit-risk modelling and validation platform** built around a traditional WoE/logistic scorecard, challenger modelling, IFRS 9-style expected-credit-loss mechanics, stress testing, monitoring and model-governance documentation.
 
 The project is designed to demonstrate the workflow behind **PD modelling, scorecards, model validation, portfolio loss forecasting, stress testing, early-warning/risk-grade monitoring and IFRS 9 ECL architecture** without inventing empirical LGD/EAD results that the public source data cannot support.
