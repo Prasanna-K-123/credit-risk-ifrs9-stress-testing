@@ -216,3 +216,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# FDIC raw responses are acquired locally; compact research extracts are explicit reference assets.
+data/fdic_temporal/
