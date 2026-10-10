@@ -1,5 +1,9 @@
 # Credit Risk, IFRS 9 & Stress Testing
 
+## Matched-budget evidence extension — October10,2026
+
+A second public cohort adds **30,000 Taiwan credit-card records**, identical18,007-client training budgets, separate calibration/policy splits and6,001 held-out clients. Duplicate model-input groups never cross partitions. Challenger AUC0.7897 versus scorecard0.7814; Brier/cost differences remain uncertain, and calibration worsens raw test Brier. [Read the complete protocol, results and limits](docs/MATCHED_COHORT_REVIEW.md). This is one historical cohort, **not out-of-time validation**.
+
 ## Evidence release — 2026-10-09
 
 [Paired uncertainty and decision audit](outputs/decision_audit/summary.json) · [Prior-shift scenarios](outputs/decision_audit/prior_shift_scenarios.csv) · `python audit_reference.py`

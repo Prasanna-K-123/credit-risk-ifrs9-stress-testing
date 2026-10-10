@@ -1,0 +1,29 @@
+name: Matched-budget credit evidence
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  matched-cohort:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: "2"
+      OPENBLAS_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-card-clients.txt
+      - run: python -m pip install -r requirements-card-clients.txt
+      - run: python -m pytest -q
+      - name: Reproduce matched-budget cohort and frozen holdout
+        run: python benchmark_card_clients.py --download --verify
+      - uses: actions/upload-artifact@v4
+        with:
+          name: matched-credit-cohort
+          path: reference/card_clients/
