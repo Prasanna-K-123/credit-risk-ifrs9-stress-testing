@@ -218,3 +218,5 @@ __marimo__/
 .streamlit/secrets.toml
 # FDIC raw responses are acquired locally; compact research extracts are explicit reference assets.
 data/fdic_temporal/
+# The complete, byte-identical frozen FDIC predictions are committed as gzip.
+reference/fdic_temporal/test_predictions.csv

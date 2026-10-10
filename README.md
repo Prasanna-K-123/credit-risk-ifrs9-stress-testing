@@ -1,5 +1,11 @@
 # Credit Risk, IFRS 9 & Stress Testing
 
+## Retrospective temporal bank-risk study — October 10, 2026
+
+**237,253 eligible FDIC bank-year observations; 57,896 final observations across 11 later annual cohorts.** Separate development, selection, calibration and monitoring-policy years, purged boundaries, nine whitelisted predictors, equal three-trial model budgets and paired bank/year uncertainty. Calibrated boosting AUC **0.9155** versus full logistic **0.8381**, but it misses **9/10 failures in the later 2022–2025 cohorts** under the frozen monitoring rule. Capital-only logistic has higher pooled AUC; calibration worsens raw probability scores. [Full results, every missed case and exact replay](docs/FDIC_TEMPORAL_REVIEW.md).
+
+This is **bank-certificate failure using a current historical snapshot and assumed reporting lag**. It does not establish borrower out-of-time PD or original-vintage performance. `python replay_fdic_temporal.py` reconstructs all dated inputs and labels from pinned original-source extracts and verifies the frozen fit.
+
 ## Matched-budget evidence extension — October10,2026
 
 A second public cohort adds **30,000 Taiwan credit-card records**, identical18,007-client training budgets, separate calibration/policy splits and6,001 held-out clients. Duplicate model-input groups never cross partitions. Challenger AUC0.7897 versus scorecard0.7814; Brier/cost differences remain uncertain, and calibration worsens raw test Brier. [Read the complete protocol, results and limits](docs/MATCHED_COHORT_REVIEW.md). This is one historical cohort, **not out-of-time validation**.
@@ -59,37 +65,18 @@ See [`data/README.md`](data/README.md) and [`docs/GOVERNANCE_LIMITATIONS.md`](do
 
 ## Architecture
 
-```text
-UCI South German Credit
-        |
-        v
-data validation + train/validation/holdout
-        |
-        +-----------------------+
-        |                       |
-        v                       v
-WoE / IV scorecard        RF challenger
-        |                       |
-        +-----------+-----------+
-                    v
-      discrimination + calibration
-      bootstrap CI + cost threshold
-      PSI + risk grades
-                    |
-                    v
-             PD term mechanics
-                    |
-        +-----------+-----------+
-        |                       |
-        v                       v
-  IFRS 9 staging          stress scenarios
-        |                       |
-        +-----------+-----------+
-                    v
-           scenario-weighted ECL
-                    |
-                    v
-        validation / governance report
+```mermaid
+flowchart TD
+  A["UCI source and data controls"] --> B["Scorecard"]
+  A --> C["Challenger"]
+  B --> D["Validation and decision audit"]
+  C --> D
+  D --> E["PD term mechanics"]
+  E --> F["IFRS9 staging"]
+  E --> G["Stress assumptions"]
+  F --> H["Illustrative ECL"]
+  G --> H
+  H --> I["Governance report"]
 ```
 
 ## Run locally

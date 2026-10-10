@@ -16,11 +16,11 @@ Official definition files are served at `https://api.fdic.gov/banks/docs/risview
 
 ## Precisely bounded question
 
-For an FDIC-insured institution with a December 31 financial report, assumed usable on April 1 of the next year, estimate whether its **insurance certificate** has a recorded FDIC failure in the following calendar year. Only institutions still in existence and insured at prediction are eligible. A nonfailure merger/closure or insurance exit during that year is a competing nonfailure outcome. This is the probability of the defined certificate event, not hypothetical failure in a world without mergers, borrower delinquency, bond default, or an IFRS9 provision.
+For an FDIC-insured institution with a December 31 financial report, assumed usable on April 1 of the next year, estimate whether its **insurance certificate** has a recorded FDIC failure in the following one-year interval, **(April 1, next April 1]**. Only institutions still in existence and insured at prediction are eligible. A nonfailure merger/closure or insurance exit during that interval is a competing nonfailure outcome. This is the probability of the defined certificate event, not hypothetical failure in a world without mergers, borrower delinquency, bond default, or an IFRS9 provision.
 
 Annual anchors avoid counting the same terminal failure in four overlapping quarterly target windows. They deliberately sacrifice update frequency. Repeated certificates across later annual observations are appropriate for longitudinal monitoring; they are not claimed to be unseen institutions. No bank identifier, current status, closure date, failure date or partition marker is a predictor.
 
-The financial source is a **current historical snapshot**. It can contain corrections and later revisions. A three-month publication delay is conservative as a research convention but is not verified actual per-record availability. Therefore the permitted claim is **retrospective temporal evaluation with a declared availability lag**, not historical point-in-time trading/underwriting performance. The borrower-level out-of-time and original-vintage data gaps remain open.
+The financial source is a **current historical snapshot**. It can contain corrections and later revisions. The three-month availability lag is a research convention; its adequacy or conservatism is not established by actual per-record publication times. Therefore the permitted claim is **retrospective temporal evaluation with a declared availability lag**, not historical point-in-time trading/underwriting performance. The borrower-level out-of-time and original-vintage data gaps remain open.
 
 ## Inputs and dates
 

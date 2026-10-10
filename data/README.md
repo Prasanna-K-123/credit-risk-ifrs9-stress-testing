@@ -1,12 +1,18 @@
 # Data provenance
 
+## Separate dated institutional-risk extension
+
+The [FDIC retrospective temporal study](../docs/FDIC_TEMPORAL_REVIEW.md) uses official institutional financial, insurance/closure and failure records. Its 31 compact original-source extracts are pinned under `reference/fdic_temporal/` so every eligible row, predictor and label can be reconstructed without mutable live API calls. [The source receipt](../reference/fdic_temporal/source_snapshot.json) records full queries, indices, counts and hashes. These are current historical values, with an assumed April 1 availability lag; original-release vintages are not available. The target is bank-certificate failure with competing nonfailure exits, not borrower PD. FDIC source attribution and disclaimers remain separate from the implementation's MIT licence.
+
+## Original South German borrower study
+
 The modelling pipeline downloads **South German Credit** directly from the official UCI Machine Learning Repository archive for dataset id **522** and reads `SouthGermanCredit.asc` from the published ZIP.
 
 Official UCI DOI: `10.24432/C5X89F`.
 
 The dataset contains 1,000 historical credit observations, 20 predictors and a binary credit-risk outcome. UCI documents 700 good and 300 bad credits, no missing values, and notes that bad credits were deliberately oversampled.
 
-Raw data are intentionally **not copied into this repository**. Run `python run_pipeline.py` to fetch the UCI source and regenerate all evidence.
+The original South German raw data are intentionally **not copied into this repository**. Run `python run_pipeline.py` to fetch that UCI source and regenerate its evidence.
 
 ## Critical suitability limits
 

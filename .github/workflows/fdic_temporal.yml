@@ -24,7 +24,7 @@ jobs:
       - run: python -m pytest -q
       - name: Replay registered pinned temporal study
         if: ${{ hashFiles('reference/fdic_temporal/summary.json') != '' }}
-        run: python benchmark_fdic_temporal.py --verify
+        run: python replay_fdic_temporal.py
       - uses: actions/upload-artifact@v4
         with:
           name: fdic-temporal-research

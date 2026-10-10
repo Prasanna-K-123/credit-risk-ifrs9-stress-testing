@@ -1,5 +1,9 @@
 # Governance, limitations and validation standards
 
+## Scope of the dated FDIC extension
+
+The separate [registered FDIC comparison](FDIC_TEMPORAL_REVIEW.md) provides retrospective calendar-separated institutional-failure evidence. It does not turn the UCI borrower studies into dated samples, establish original-release information availability, or calibrate an IFRS9 provision. Its later-period failures, calibration deterioration, competing exits, rare outcomes and dependence-sensitive monitoring-cost conclusion are retained. The borrower-specific limitations below continue to apply to the original study.
+
 ## Model-risk principles implemented
 
 1. **Source traceability** — public UCI source and DOI are documented.
