@@ -40,7 +40,7 @@ def test_vector_validation_rejects_truncation_and_invalid_domains():
         ({"default_flags": [0, 2]}, "0 or 1"),
         ({"default_flags": [0.5, 1]}, "0 or 1"),
         ({"base_pd": [[0.05], [0.12]]}, "one-dimensional"),
-        ({"base_pd": []}, "equal lengths"),
+        ({"base_pd": []}, "empty portfolio"),
     ]
     for replacement, error in bad_cases:
         inputs = dict(valid, **replacement)
