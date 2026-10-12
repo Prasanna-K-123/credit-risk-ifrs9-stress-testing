@@ -18,11 +18,35 @@ def scenario_portfolio_ecl(
     default_flags,
     base_lgd: float = BASE_LGD,
 ) -> pd.DataFrame:
-    rows = []
+    # Fail closed: zip() would silently truncate mismatched portfolio vectors
+    # while the old EAD aggregate would still include every supplied amount.
     base_pd = np.asarray(base_pd, dtype=float)
     amounts = np.asarray(amounts, dtype=float)
-    remaining_months = np.asarray(remaining_months, dtype=int)
-    default_flags = np.asarray(default_flags, dtype=int)
+    remaining_months = np.asarray(remaining_months, dtype=float)
+    default_flags = np.asarray(default_flags, dtype=float)
+    vectors = (base_pd, amounts, remaining_months, default_flags)
+    if any(v.ndim != 1 for v in vectors):
+        raise ValueError("Portfolio inputs must all be one-dimensional arrays.")
+    n = base_pd.size
+    if n == 0:
+        raise ValueError("An empty portfolio cannot produce scenario ECL.")
+    if any(v.size != n for v in vectors):
+        raise ValueError("PD, amount, maturity and default vectors must have equal lengths.")
+    if any(not np.isfinite(v).all() for v in vectors):
+        raise ValueError("Portfolio inputs must be finite.")
+    if np.any((base_pd < 0) | (base_pd > 1)):
+        raise ValueError("PD must be within [0, 1].")
+    if np.any(amounts < 0):
+        raise ValueError("Amounts must be nonnegative.")
+    if np.any((remaining_months <= 0) | (remaining_months != np.floor(remaining_months))):
+        raise ValueError("Remaining months must be positive whole numbers.")
+    if np.any((default_flags != 0) & (default_flags != 1)):
+        raise ValueError("Default flags must be 0 or 1.")
+    if not np.isfinite(base_lgd) or not (0 <= base_lgd <= 1):
+        raise ValueError("Base LGD must be finite and within [0, 1].")
+    remaining_months = remaining_months.astype(int)
+    default_flags = default_flags.astype(int)
+    rows = []
 
     for scenario in SCENARIOS:
         pds = stressed_pd(base_pd, scenario.pd_multiplier)
