@@ -17,7 +17,7 @@ The UCI demonstration has no origination/current longitudinal PD pair, so the fa
 
 The empirical component is the scorecard's one-period probability of bad/default outcome.
 
-For Stage 2 lifetime mechanics, the code converts the 12-month PD to a constant annual hazard and derives marginal default probabilities over the remaining contractual horizon. A production framework would use calibrated term structures conditioned on macroeconomic scenarios.
+For Stage 2, the current implementation converts a clipped 12-month PD to a constant annual hazard and sums **full-year** marginal default probabilities over `max(ceil(max(remaining_months, 1) / 12), 1)` years, discounted at each year end. This is an **annual-ceiling approximation**, not exact remaining contractual-horizon integration: 1 and 12 months produce the same duration, as do 13 and 24 months. A zero or negative maturity is coerced to **one full year**, rather than being rejected or producing zero remaining payments. Stage 1 ignores `remaining_months` altogether and applies a complete 12-month PD; Stage 3 applies full LGD×EAD without a term calculation. The source does not validate shortened-horizon treatment of near-maturity assets. These behaviors are explicitly preserved for historical reproduction, not endorsed as accurate IFRS 9 measurement. A production-grade implementation would need specified maturity/contract policies and calibrated marginal PD term structures rather than silently rounding up.
 
 ## LGD
 
