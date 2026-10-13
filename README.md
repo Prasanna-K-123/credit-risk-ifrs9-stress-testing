@@ -24,6 +24,8 @@ A reproducible **credit-risk modelling and validation platform** built around a 
 
 The project is designed to demonstrate the workflow behind **PD modelling, scorecards, model validation, portfolio loss forecasting, stress testing, early-warning/risk-grade monitoring and IFRS 9 ECL architecture** without inventing empirical LGD/EAD results that the public source data cannot support.
 
+**ECL horizon limitation:** the preserved demonstration uses an annual-ceiling approximation: Stage 1 ignores remaining maturity, while Stage 2 rounds it up to full years (including one year for zero or negative inputs). This is not exact contractual-horizon measurement or an IFRS 9-compliant provision. [Read the implemented behavior and assumptions](docs/IFRS9_METHODOLOGY.md).
+
 ## Verified headline evidence
 
 - Holdout scorecard ROC-AUC: **0.730** (95% bootstrap CI **0.651–0.806**)
@@ -125,4 +127,4 @@ A credit-risk repository is weaker—not stronger—if it silently manufactures 
 
 ## Evidence status
 
-GitHub Actions runs the unit tests and full pipeline on every push. The generated quantitative evidence is persisted under `outputs/` and `reports/generated/`, and the latest validation workflow completed successfully. Headline metrics above are therefore backed by committed reproducible artifacts rather than copied claims.
+GitHub Actions validates the research source and reference results retained under `outputs/` and `reports/generated/`. The recorded successful workflows identify their exact validated source commits. Documentation-only commits may skip rerunning frozen studies; a documentation update is not a new model-validation result.
