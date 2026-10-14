@@ -26,6 +26,8 @@ The project is designed to demonstrate the workflow behind **PD modelling, score
 
 **ECL horizon limitation:** the preserved demonstration uses an annual-ceiling approximation: Stage 1 ignores remaining maturity, while Stage 2 rounds it up to full years (including one year for zero or negative inputs). This is not exact contractual-horizon measurement or an IFRS 9-compliant provision. [Read the implemented behavior and assumptions](docs/IFRS9_METHODOLOGY.md).
 
+An [opt-in maturity-respecting mathematical reference](docs/MATURITY_REFERENCE.md) integrates constant-hazard default loss over the actual monthly horizon and caps Stage 1 default-event timing at one year. It has separate formula and domain tests; its fixed-exposure/immediate-loss assumptions do not establish accounting compliance or empirical calibration.
+
 ## Verified headline evidence
 
 - Holdout scorecard ROC-AUC: **0.730** (95% bootstrap CI **0.651–0.806**)
@@ -128,3 +130,4 @@ A credit-risk repository is weaker—not stronger—if it silently manufactures 
 ## Evidence status
 
 GitHub Actions validates the research source and reference results retained under `outputs/` and `reports/generated/`. The recorded successful workflows identify their exact validated source commits. Documentation-only commits may skip rerunning frozen studies; a documentation update is not a new model-validation result.
+
